@@ -1,6 +1,13 @@
 // Import createAsyncThunk and createSlice here.
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
 // Create loadCommentsForArticleId here.
+const loadCommentsForArticleId = createAsyncThunk(
+  'comments/loadCommentsForArticleId',
+  async (id, thunkAPI) => {
+
+  }
+)
 
 // Create postCommentForArticleId here.
 
