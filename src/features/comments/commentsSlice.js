@@ -24,8 +24,8 @@ export const commentsSlice = createSlice({
     // Add extraReducers here.
     extraReducers: {
       [loadCommentsForArticleId.pending]: (state, action) => {
-        state.isLoading = true
-        state.hasError = false
+        state.isLoadingComments = true
+        state.failedToLoadComments = false
       },
       [loadCommentsForArticleId.fulfilled]: (state, action) => {
         // action.payload is a comment object with an articleId property you can use to add the comment to the correct article’s comment list in state.
@@ -36,11 +36,12 @@ export const commentsSlice = createSlice({
           //   ... 
           // }
         state.byArticleId = action.payload
-        state.isLoading = false
-        state.hasError = true
+        state.isLoadingComments = false
+        state.failedToLoadComments = true
       },
       [loadCommentsForArticleId.rejected]: (state, action) => {
-
+        state.isLoadingComments = false
+        state.failedToLoadComments = true
       }
     }
   });
