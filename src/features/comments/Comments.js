@@ -17,7 +17,13 @@ const Comments = () => {
   const commentsAreLoading = comments.isLoadingComments;
 
   // Dispatch loadCommentsForArticleId with useEffect here.
+  useEffect(() => {
+    if (typeof article !== "undefined") {
+      loadCommentsForArticleId()
+    }
+  }, [article])
 
+  const commentsForArticleId = typeof article == "undefined" ? [] : comments[article.id]
 
   if (commentsAreLoading) return <div>Loading Comments</div>;
   if (!article) return null;
