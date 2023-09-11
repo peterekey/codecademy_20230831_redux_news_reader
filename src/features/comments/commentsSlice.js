@@ -22,6 +22,27 @@ export const commentsSlice = createSlice({
       failedToLoadComments: false
     },
     // Add extraReducers here.
+    extraReducers: {
+      [loadCommentsForArticleId.pending]: (state, action) => {
+        state.isLoading = true
+        state.hasError = false
+      },
+      [loadCommentsForArticleId.fulfilled]: (state, action) => {
+        // action.payload is a comment object with an articleId property you can use to add the comment to the correct article’s comment list in state.
+
+          // {
+          //   123: ['Great article!' , 'I disagree.']
+          //   456: ['This is some great writing.'],
+          //   ... 
+          // }
+        state.byArticleId = action.payload
+        state.isLoading = false
+        state.hasError = true
+      },
+      [loadCommentsForArticleId.rejected]: (state, action) => {
+
+      }
+    }
   });
   
   export const selectComments = (state) => state.comments.byArticleId;
