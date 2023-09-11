@@ -13,7 +13,7 @@ const Comments = () => {
   const dispatch = useDispatch();
   const article = useSelector(selectCurrentArticle);
   // Declare additional selected data here.
-  const comments = useSelector((state) => state.comments.value);
+  const comments = useSelector((state) => state.comments);
   const commentsAreLoading = comments.isLoadingComments;
 
   // Dispatch loadCommentsForArticleId with useEffect here.
