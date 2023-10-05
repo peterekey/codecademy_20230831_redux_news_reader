@@ -19,11 +19,17 @@ const Comments = () => {
   // Dispatch loadCommentsForArticleId with useEffect here.
   useEffect(() => {
     if (typeof article !== "undefined") {
-      loadCommentsForArticleId()
+      dispatch(loadCommentsForArticleId(article.id))
     }
-  }, [article])
-
-  const commentsForArticleId = typeof article == "undefined" ? [] : comments[article.id]
+  }, [article, dispatch])
+  
+  let commentsForArticleId
+  
+  if (typeof article == "undefined") {
+    commentsForArticleId = []
+  } else {
+    commentsForArticleId = comments.byArticleId.comments
+  }
 
   if (commentsAreLoading) return <div>Loading Comments</div>;
   if (!article) return null;
@@ -31,7 +37,7 @@ const Comments = () => {
   return (
     <div className='comments-container'>
       <h3 className='comments-title'>Comments</h3>
-      <CommentList comments={[]} />
+      <CommentList comments={commentsForArticleId} />
       <CommentForm articleId={article.id} />
     </div>
   );

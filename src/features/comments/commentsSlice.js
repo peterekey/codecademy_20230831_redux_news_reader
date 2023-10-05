@@ -5,7 +5,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 export const loadCommentsForArticleId = createAsyncThunk(
   'comments/loadCommentsForArticleId',
   async (id, thunkAPI) => {
-    const response = await fetch(`api/articles/${id}/comments`)
+    const response = await fetch(`/api/articles/${id}/comments`)
     const json = await response.json()
     return json
   }
@@ -36,6 +36,7 @@ export const commentsSlice = createSlice({
           //   ... 
           // }
         state.byArticleId = action.payload
+
         state.isLoadingComments = false
         state.failedToLoadComments = true
       },
