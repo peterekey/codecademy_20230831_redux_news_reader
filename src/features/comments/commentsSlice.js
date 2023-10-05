@@ -15,16 +15,25 @@ export const loadCommentsForArticleId = createAsyncThunk(
 export const postCommentForArticleId = createAsyncThunk(
   'comments/postCommentForArticleId',
   async ({ articleId, comment}) => {
-
+    const requestBody = JSON.stringify(comment)
+    const response = await fetch(`/api/articles/${articleId}/comments`, {
+      method: "POST",
+      body: requestBody
+    })
+    const json = response.json()
+    return json
   }
 )
+
 export const commentsSlice = createSlice({
     name: 'comments',
     initialState: {
       // Add initial state properties here.
       byArticleId: {},
       isLoadingComments: false,
-      failedToLoadComments: false
+      failedToLoadComments: false,
+      createCommentIsPending: false,
+      failedToCreateComment: false
     },
     // Add extraReducers here.
     extraReducers: {
